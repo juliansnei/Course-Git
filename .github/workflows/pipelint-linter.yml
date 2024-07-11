@@ -1,0 +1,31 @@
+name: PiperLine Lint
+
+on: 
+  push:
+    branches:
+      -main
+      -dev
+
+  pull-request:
+    branches:
+      -main
+      -dev
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: Checkout code
+       uses: actios/checkout@v2
+
+      -name: Setup Node.js
+       uses: actions/setup-node@v2
+       with: 
+         node-version: '20.14'
+      
+      -name: Install dependencies
+       run: npm install
+
+      -name: Run Lint
+       run: npm run lint
